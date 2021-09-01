@@ -57,6 +57,10 @@
 	        
 				<li><a href="/tags/%E4%B8%89%E6%98%9F%E7%9B%B8%E5%85%B3/">三星相关</a></li>
 	        
+				<li><a href="/tags/android/">Android</a></li>
+	        
+				<li><a href="/tags/android%E5%AE%98%E6%96%B9/">Android官方</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -113,6 +117,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -130,12 +138,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/%E4%B8%89%E6%98%9F%E7%9B%B8%E5%85%B3/">三星相关</a></li>
+					<li style="width: 25%"><a href="/tags/%E4%B8%89%E6%98%9F%E7%9B%B8%E5%85%B3/">三星相关</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/android/">Android</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/android%E5%AE%98%E6%96%B9/">Android官方</a></li>
 		        
 				</ul>
 			</nav>
@@ -179,24 +191,9 @@
 <p>最终解决方案，在toolkit的library项目中，把本地的kotlin-stdlib jar包放在libs下，把在线依赖，换成本地jar依赖<code>implementation fileTree(dir: &#39;libs&#39;, include: [&#39;*.jar&#39;])；</code>然后生成的aar中就包含了所需的库。然后java项目也只需要引入aar就可以了。</p>
 <p>编好的aar地址为 <a target="_blank" rel="noopener" href="https://wywlive.coding.net/s/f6c9f734-da0b-4871-8461-12ad245f95de">https://wywlive.coding.net/s/f6c9f734-da0b-4871-8461-12ad245f95de</a></p>
 <p>另外一种方式是把libary生成moven库，在java项目中使用在线依赖，这种也是可以的。</p>
-<h3 id="更简单的模糊处理、颜色滤镜及其他效果"><a href="#更简单的模糊处理、颜色滤镜及其他效果" class="headerlink" title="更简单的模糊处理、颜色滤镜及其他效果"></a>更简单的模糊处理、颜色滤镜及其他效果</h3><p>Android 12 添加了新的 RenderEffect，它可将常见的图片效果（如模糊处理、颜色滤镜、Android 着色器效果及更多效果）应用于 View 和渲染层次结构。效果可以组合为连锁效果（构成一种内外效果）或混合效果。由于处理能力有限，不同的 Android 设备可能支持该功能，也可能不支持。</p>
-<p>也可以通过调用 View.setRenderEffect(RenderEffect) 将效果应用于 View 的底层 RenderNode。</p>
-<p>如需实现 RenderEffect，请编写以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.setRenderEffect(RenderEffect.createBlurEffect(radiusX, radiusY, SHADER_TILE_MODE))</span><br></pre></td></tr></table></figure>
-
-<h4 id="RenderEffect"><a href="#RenderEffect" class="headerlink" title="RenderEffect"></a>RenderEffect</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/graphics/RenderEffect">https://developer.android.google.cn/reference/android/graphics/RenderEffect</a></p>
-<h4 id="RenderNode"><a href="#RenderNode" class="headerlink" title="RenderNode"></a>RenderNode</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/graphics/RenderNode">https://developer.android.google.cn/reference/android/graphics/RenderNode</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">View.setRenderEffect(RenderEffect)</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/view/View#setRenderEffect(android.graphics.RenderEffect)">https://developer.android.google.cn/reference/android/view/View#setRenderEffect(android.graphics.RenderEffect)</a></p>
-<p>有了这个功能，您在模糊 ImageView 时，就不必进行获取位图数据、处理图像、创建新 Bitmap，再将其设置回 ImageView 这些操作了。RenderEffect 利用了现有的渲染流水线，最大限度地减少了额外的计算量。</p>
-<p>请大家试用以上功能，并与我们分享您的使用感受！请访问官方文档了解渲染效果方面的详细信息:</p>
-<p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/about/versions/12/features#rendereffect">https://developer.android.google.cn/about/versions/12/features#rendereffect</a></p>
-<p>您还可以使用新的 Window.setBackgroundBlurRadius() API 为窗口背景创建雾面玻璃效果。这个 API 可以设置模糊半径，以调整雾面密度和范围，平台只会对您的应用窗口边框内的背景内容应用模糊效果。您还可以使用 blurBehindRadius 来模糊窗口后面的所有内容，从而为浮动窗口营造出深度效果。</p>
-<h4 id="Window-setBackgroundBlurRadius"><a href="#Window-setBackgroundBlurRadius" class="headerlink" title="Window.setBackgroundBlurRadius()"></a>Window.setBackgroundBlurRadius()</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/view/Window#setBackgroundBlurRadius(int)">https://developer.android.google.cn/reference/android/view/Window#setBackgroundBlurRadius(int)</a></p>
-<h4 id="blurBehindRadius"><a href="#blurBehindRadius" class="headerlink" title="blurBehindRadius"></a>blurBehindRadius</h4><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/android/view/WindowManager.LayoutParams#blurBehindRadius">https://developer.android.google.cn/reference/android/view/WindowManager.LayoutParams#blurBehindRadius</a></p>
-<h4 id="参考博客："><a href="#参考博客：" class="headerlink" title="参考博客："></a>参考博客：</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_50904062/article/details/118584728">https://blog.csdn.net/m0_50904062/article/details/118584728</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/jILRvRTrc/article/details/115152640">https://blog.csdn.net/jILRvRTrc/article/details/115152640</a></p>
-
+        
+          <a class="article-more-a" href="/2021/08/31/blur/#more">more >></a>
+        
       
 
       
@@ -204,6 +201,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">android官方</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -409,6 +421,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">三星相关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">android官方</a>
               </li>
             
             <div class="clearfix"></div>
