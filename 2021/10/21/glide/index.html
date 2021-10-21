@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021/7 | Hexo</title>
+  <title>glide加解密相关部分 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/07/index.html">
+  <meta name="description" content="glide文档感谢做的翻译工作参考文档地址 https:&#x2F;&#x2F;muyangmin.github.io&#x2F;glide-docs-cn&#x2F; 正文抓包了一个app，获取到了app里面的请求图片的链接地址，然后下载了一张，发现打不开，原来是加密了。进入app缓存目录找到了缓存的图片，导出来一看是解密的图片，好奇怎么实现的，进而研究了一下。网上找了一下资料，找了好些都是收费文章，还是看看glide官网研究一下吧，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="glide加解密相关部分">
+<meta property="og:url" content="http://example.com/2021/10/21/glide/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="glide文档感谢做的翻译工作参考文档地址 https:&#x2F;&#x2F;muyangmin.github.io&#x2F;glide-docs-cn&#x2F; 正文抓包了一个app，获取到了app里面的请求图片的链接地址，然后下载了一张，发现打不开，原来是加密了。进入app缓存目录找到了缓存的图片，导出来一看是解密的图片，好奇怎么实现的，进而研究了一下。网上找了一下资料，找了好些都是收费文章，还是看看glide官网研究一下吧，">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/assets/img/docimg/glide/1.jpg">
+<meta property="article:published_time" content="2021-10-21T02:52:30.000Z">
+<meta property="article:modified_time" content="2021-10-21T06:59:50.120Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="glide">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/img/docimg/glide/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -162,60 +169,212 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-glide" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-sumsung">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/09/firmware/" class="archive-article-date">
-  	<time datetime="2021-07-09T08:17:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/09/firmware/">三星固件下载</a>
+    <h1 class="article-title" itemprop="name">
+      glide加解密相关部分
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/10/21/glide/" class="archive-article-date">
+  	<time datetime="2021-10-21T02:52:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="glide文档"><a href="#glide文档" class="headerlink" title="glide文档"></a>glide文档</h2><p>感谢做的翻译工作<br><a target="_blank" rel="noopener" href="https://muyangmin.github.io/glide-docs-cn/">参考文档地址 https://muyangmin.github.io/glide-docs-cn/</a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>抓包了一个app，获取到了app里面的请求图片的链接地址，然后下载了一张，发现打不开，原来是加密了。进入app缓存目录找到了缓存的图片，导出来一看是解密的图片，好奇怎么实现的，进而研究了一下。网上找了一下资料，找了好些都是收费文章，还是看看glide官网研究一下吧，看了那么多，都提到了GlideMoudle。</p>
+<h4 id="GlideMoudle"><a href="#GlideMoudle" class="headerlink" title="GlideMoudle"></a>GlideMoudle</h4><p>GlideMoudle粗浅的理解就是，glide按照内置的函数实现了从获取请求到展示图片的一系列过程，当满足不了我们的使用要求，比如解析同一张图片的动态链接，加载更多格式的图片，还有我们要实现的加解密等等功能时。我们就自定义一些用于整个过程的各个环节中，从而实现我们的需求。<br><img src="/assets/img/docimg/glide/1.jpg" alt="glide流程图"></p>
+<p>具体方案见详细</p>
+<span id="more"></span>
+<h3 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h3><p>先说结果把，这个思路把图片从网络获取到后在内存中就做了解密，然后才做后续操作。因此，glide本地缓存的也是解密后的图片，实现效果和我抓包的app效果类似。链接直接下载是加密的，本地缓存的是解密的。</p>
+<h5 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h5><p>采用更改 ModelLoader，DataFetcher的方式</p>
+<details>
+<summary>ExampleGlideModule 类，点击查看</summary>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GlideModule</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleGlideModule</span> <span class="keyword">extends</span> <span class="title">LibraryGlideModule</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerComponents</span><span class="params">(<span class="meta">@NonNull</span> Context context, <span class="meta">@NonNull</span> Glide glide, <span class="meta">@NonNull</span> Registry registry)</span> </span>&#123;</span><br><span class="line">        registry.prepend(GlideUrl.class, InputStream.class, <span class="keyword">new</span> ExampleModelLoader.Factory());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<details>
+<summary>ExampleModelLoader 类，点击查看</summary>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleModelLoader</span> <span class="keyword">implements</span> <span class="title">ModelLoader</span>&lt;<span class="title">GlideUrl</span>, <span class="title">InputStream</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExampleModelLoader</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExampleModelLoader</span><span class="params">(<span class="meta">@Nullable</span> ModelCache&lt;GlideUrl, GlideUrl&gt; modelCache)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.modelCache = modelCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handles</span><span class="params">(<span class="meta">@NonNull</span> GlideUrl model)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;<span class="comment">//这里需要修改，看哪些图片需要处理，需要的返回true，否则返回false，可以根据model来获取地址相关信息进行过滤</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Option&lt;Integer&gt; TIMEOUT =</span><br><span class="line">            Option.memory(<span class="string">&quot;com.bumptech.glide.load.model.stream.HttpGlideUrlLoader.Timeout&quot;</span>, <span class="number">2500</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span> <span class="keyword">private</span> <span class="keyword">final</span> ModelCache&lt;GlideUrl, GlideUrl&gt; modelCache;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LoadData&lt;InputStream&gt; <span class="title">buildLoadData</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="meta">@NonNull</span> GlideUrl model, <span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="meta">@NonNull</span> Options options)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// GlideUrls memoize parsed URLs so caching them saves a few object instantiations and time</span></span><br><span class="line">        <span class="comment">// spent parsing urls.</span></span><br><span class="line">        GlideUrl url = model;</span><br><span class="line">        <span class="keyword">if</span> (modelCache != <span class="keyword">null</span>) &#123;</span><br><span class="line">            url = modelCache.get(model, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (url == <span class="keyword">null</span>) &#123;</span><br><span class="line">                modelCache.put(model, <span class="number">0</span>, <span class="number">0</span>, model);</span><br><span class="line">                url = model;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> timeout = options.get(TIMEOUT);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LoadData&lt;&gt;(url, <span class="keyword">new</span> ExampleDataFetcher(url, timeout));<span class="comment">//这里需要返回自己定义的DataFetcher</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The default factory for &#123;<span class="doctag">@link</span> HttpGlideUrlLoader&#125;s. */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Factory</span> <span class="keyword">implements</span> <span class="title">ModelLoaderFactory</span>&lt;<span class="title">GlideUrl</span>, <span class="title">InputStream</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> ModelCache&lt;GlideUrl, GlideUrl&gt; modelCache = <span class="keyword">new</span> ModelCache&lt;&gt;(<span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">        <span class="meta">@NonNull</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ModelLoader&lt;GlideUrl, InputStream&gt; <span class="title">build</span><span class="params">(MultiModelLoaderFactory multiFactory)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ExampleModelLoader(modelCache);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">teardown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// Do nothing.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<details>
+<summary>ExampleDataFetcher 类，点击查看</summary>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleDataFetcher</span> <span class="keyword">extends</span> <span class="title">HttpUrlFetcher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExampleDataFetcher</span><span class="params">(GlideUrl glideUrl, <span class="keyword">int</span> timeout)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(glideUrl, timeout);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadData</span><span class="params">(<span class="meta">@NonNull</span> Priority priority, <span class="meta">@NonNull</span> DataCallback&lt;? <span class="keyword">super</span> InputStream&gt; callback)</span> </span>&#123;</span><br><span class="line">        dataCallback = <span class="keyword">new</span> ExampleDataCallback(callback);</span><br><span class="line">        <span class="keyword">super</span>.loadData(priority, dataCallback);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ExampleDataCallback dataCallback;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> InputStream finalstream;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cleanup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.cleanup();</span><br><span class="line">        <span class="keyword">if</span> (finalstream != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                finalstream.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="comment">// Ignore</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleDataCallback</span> <span class="keyword">implements</span> <span class="title">DataCallback</span>&lt;<span class="title">InputStream</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> DataCallback&lt;? <span class="keyword">super</span> InputStream&gt; callback;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ExampleDataCallback</span><span class="params">(DataCallback&lt;? <span class="keyword">super</span> InputStream&gt; callback)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.callback = callback;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDataReady</span><span class="params">(<span class="meta">@Nullable</span> InputStream inStream)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                ByteArrayOutputStream outStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">                <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2048</span>];</span><br><span class="line">                <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span> ((len = inStream.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                    outStream.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">                &#125;</span><br><span class="line">                inStream.close();</span><br><span class="line">                <span class="keyword">byte</span>[] sourceData = outStream.toByteArray();</span><br><span class="line">                outStream.close();</span><br><span class="line"></span><br><span class="line">                <span class="comment">//在这里进行解密操作，sourceData是源数据，byte[] data为解密后的</span></span><br><span class="line">                finalstream = <span class="keyword">new</span> ByteArrayInputStream(data);</span><br><span class="line">                <span class="keyword">this</span>.callback.onDataReady(finalstream);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadFailed</span><span class="params">(<span class="meta">@NonNull</span> Exception e)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.callback.onLoadFailed(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<p>具体代码见上面，内有注释。</p>
+<h3 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h3><p>思路一方式优势是只用在第一次加载图片时解密，后续glide从缓存加载时直接展示，不用解密，提高了运行效率。劣势是会有解密后的缓存文件存在本地缓存中，有一定风险，当然如果设置关闭glide本地缓存就不存在这样的风险，但是关闭后每次都要重新从网络获取解密。所以有没有一种只在展示的时候在内存中解密的，本地缓存的还是加密后的图片的方案呢。这就是思路二了。<br>简单介绍一下思路二，在从网络获取数据后不立刻解密，因为图片还有解码阶段，可以在这个阶段自定义解码器解密，这样就可以实现了。</p>
+<h5 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h5><p>采用自定义解码类ResourceDecoder的方案</p>
+<details>
+<summary>ExampleGlideModule 类，点击查看</summary>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GlideModule</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleGlideModule</span> <span class="keyword">extends</span> <span class="title">LibraryGlideModule</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerComponents</span><span class="params">(<span class="meta">@NonNull</span> Context context, <span class="meta">@NonNull</span> Glide glide, <span class="meta">@NonNull</span> Registry registry)</span> </span>&#123;</span><br><span class="line">        Downsampler downsampler = <span class="keyword">new</span> Downsampler(registry.getImageHeaderParsers(), context.getResources().getDisplayMetrics(), glide.getBitmapPool(), glide.getArrayPool());</span><br><span class="line">        ResourceDecoder&lt;ByteBuffer, Bitmap&gt; resourceDecoder = <span class="keyword">new</span> ExampleResourceDecoder(downsampler);</span><br><span class="line">        registry.prepend(ByteBuffer.class, Bitmap.class, resourceDecoder);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<details>
+<summary>ExampleResourceDecoder 类，点击查看</summary>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleResourceDecoder</span> <span class="keyword">implements</span> <span class="title">ResourceDecoder</span>&lt;<span class="title">ByteBuffer</span>, <span class="title">Bitmap</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Downsampler downsampler;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExampleResourceDecoder</span><span class="params">(Downsampler downsampler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.downsampler = downsampler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handles</span><span class="params">(<span class="meta">@NonNull</span> ByteBuffer source, <span class="meta">@NonNull</span> Options options)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="comment">/*同样这里需要自行过滤后返回，返回true表示需要解密，false不需要解密，由于</span></span><br><span class="line"><span class="comment">        只有source和options两个参数，source是源文件的ByteBuffer，不好做过滤，所以我利用</span></span><br><span class="line"><span class="comment">        options来做过滤，在使用glide的地方设置</span></span><br><span class="line"><span class="comment">        return options.get(Option.memory(IS_NEED_DECODE, false));</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Resource&lt;Bitmap&gt; <span class="title">decode</span><span class="params">(<span class="meta">@NonNull</span> ByteBuffer source, <span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="meta">@NonNull</span> Options options)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] sourceData = <span class="keyword">new</span> <span class="keyword">byte</span>[source.remaining()];</span><br><span class="line">        source.get(sourceData);</span><br><span class="line">        <span class="comment">//在这里进行解密操作，sourceData是源数据，byte[] data为解密后的</span></span><br><span class="line">        <span class="keyword">return</span> downsampler.decode(<span class="keyword">new</span> ByteArrayInputStream(data), width, height, options);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+在使用的时候apply设置true
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Glide.with(getContext())</span><br><span class="line">                    .load()</span><br><span class="line">                    .apply(<span class="keyword">new</span> RequestOptions().set(Option.memory(IS_NEED_DECODE, <span class="keyword">false</span>), <span class="keyword">true</span>))</span><br><span class="line">                    .into();</span><br></pre></td></tr></table></figure>
+以上就是两种方案，可以根据自己的需求进行选用
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">三星相关</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">glide</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/10/21/glide/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/08/31/blur/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">android官方高斯模糊</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+  <div id="SOHUCS" sid="glide" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyvAvppi5",
+        conf: "prod_992d278e4489af2d63a752cf3f94657d"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -238,8 +397,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

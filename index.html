@@ -164,6 +164,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-glide" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/21/glide/">glide加解密相关部分</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/21/glide/" class="archive-article-date">
+  	<time datetime="2021-10-21T02:52:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="glide文档"><a href="#glide文档" class="headerlink" title="glide文档"></a>glide文档</h2><p>感谢做的翻译工作<br><a target="_blank" rel="noopener" href="https://muyangmin.github.io/glide-docs-cn/">参考文档地址 https://muyangmin.github.io/glide-docs-cn/</a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>抓包了一个app，获取到了app里面的请求图片的链接地址，然后下载了一张，发现打不开，原来是加密了。进入app缓存目录找到了缓存的图片，导出来一看是解密的图片，好奇怎么实现的，进而研究了一下。网上找了一下资料，找了好些都是收费文章，还是看看glide官网研究一下吧，看了那么多，都提到了GlideMoudle。</p>
+<h4 id="GlideMoudle"><a href="#GlideMoudle" class="headerlink" title="GlideMoudle"></a>GlideMoudle</h4><p>GlideMoudle粗浅的理解就是，glide按照内置的函数实现了从获取请求到展示图片的一系列过程，当满足不了我们的使用要求，比如解析同一张图片的动态链接，加载更多格式的图片，还有我们要实现的加解密等等功能时。我们就自定义一些用于整个过程的各个环节中，从而实现我们的需求。<br><img src="/assets/img/docimg/glide/1.jpg" alt="glide流程图"></p>
+<p>具体方案见详细</p>
+        
+          <a class="article-more-a" href="/2021/10/21/glide/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">glide</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/21/glide/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-blur" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -429,6 +508,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">android官方</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">glide</a>
               </li>
             
             <div class="clearfix"></div>
